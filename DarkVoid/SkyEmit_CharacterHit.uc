@@ -1,0 +1,1 @@
+class SkyEmit_CharacterHit extends SkyBaseEmit_HitEffect;

@@ -1,0 +1,1 @@
+class MOHATankShellDamageType extends MOHAExplosiveDamageType;

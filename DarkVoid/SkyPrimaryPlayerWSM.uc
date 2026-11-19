@@ -1,0 +1,1 @@
+class SkyPrimaryPlayerWSM extends SkyPrimaryWSM;

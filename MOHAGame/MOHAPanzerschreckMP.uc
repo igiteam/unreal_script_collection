@@ -1,0 +1,1 @@
+class MOHAPanzerschreckMP extends MOHAPanzerschreck;

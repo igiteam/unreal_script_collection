@@ -1,0 +1,6 @@
+interface R6DeterrentExplosive_ProjectileMesh_Class extends StaticMeshComponent
+    nativeonly
+    parseconfig
+    editinlinenew
+    noexport
+    hidecategories(Object);

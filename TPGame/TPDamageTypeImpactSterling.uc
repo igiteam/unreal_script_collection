@@ -1,0 +1,1 @@
+class TPDamageTypeImpactSterling extends TPDamageTypeImpactSMG;

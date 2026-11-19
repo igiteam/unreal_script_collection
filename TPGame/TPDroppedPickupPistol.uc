@@ -1,0 +1,2 @@
+class TPDroppedPickupPistol extends TPDroppedPickupWeapon;
+

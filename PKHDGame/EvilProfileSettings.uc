@@ -1,0 +1,1 @@
+class EvilProfileSettings extends OnlineProfileSettings;

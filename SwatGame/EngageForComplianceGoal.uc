@@ -1,0 +1,37 @@
+//////////////////////////////////////////////////////////////////////////////
+// EngageForComplianceGoal.uc - EngageForComplianceGoal class
+// The goal that causes the Officer AI to engage a particular target for compliance
+
+class EngageForComplianceGoal extends SwatCharacterGoal;
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+// 
+// Variables
+
+var(parameters) Pawn TargetPawn;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Overloaded Constructor
+
+overloaded function construct( AI_Resource r, Pawn inTargetPawn)
+{
+	super.construct( r, priority );
+
+	assert(inTargetPawn != None);
+	TargetPawn = inTargetPawn;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+// Decompiled with UE Explorer.
+defaultproperties
+{
+    Priority=85
+    goalName="EngageForCompliance"
+}

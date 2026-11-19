@@ -1,0 +1,1 @@
+class TextureCompressionNormalmap extends TextureCompressionProfile;

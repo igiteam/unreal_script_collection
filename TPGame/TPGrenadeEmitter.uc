@@ -1,0 +1,2 @@
+class TPGrenadeEmitter extends TPReplicatedEmitter;
+

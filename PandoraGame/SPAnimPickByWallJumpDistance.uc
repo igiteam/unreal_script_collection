@@ -1,0 +1,1 @@
+class SPAnimPickByWallJumpDistance extends SPAnimBlendByValue;

@@ -1,0 +1,1 @@
+class MOHASpringfieldMP extends MOHASpringfield;

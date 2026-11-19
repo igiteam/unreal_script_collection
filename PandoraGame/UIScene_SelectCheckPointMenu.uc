@@ -1,0 +1,1 @@
+class UIScene_SelectCheckPointMenu extends UIScene_BaseFrontEnd;

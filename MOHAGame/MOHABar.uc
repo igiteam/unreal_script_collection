@@ -1,0 +1,1 @@
+class MOHABar extends Object;

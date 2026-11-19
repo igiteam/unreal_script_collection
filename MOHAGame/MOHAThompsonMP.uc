@@ -1,0 +1,1 @@
+class MOHAThompsonMP extends MOHAThompson;

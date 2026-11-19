@@ -1,0 +1,15 @@
+/**
+ * Copyright 1998-2009 Epic Games, Inc. All Rights Reserved.
+ */
+
+class TMSpaceVolume extends TMWaterVolume;
+
+simulated event Touch( Actor Other, PrimitiveComponent OtherComp, vector HitLocation, vector HitNormal )
+{
+	super(PhysicsVolume).Touch(Other, OtherComp, HitLocation, HitNormal);
+}
+
+simulated function PlayEntrySplash(Actor Other)
+{
+}
+

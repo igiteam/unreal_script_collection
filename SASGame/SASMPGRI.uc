@@ -1,0 +1,2 @@
+class SASMPGRI extends SASGRI;
+

@@ -1,0 +1,1 @@
+class R6NightVisionPostProcessEffect extends R6MegaPostProcessEffect;

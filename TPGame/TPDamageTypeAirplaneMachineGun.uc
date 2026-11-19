@@ -1,0 +1,1 @@
+class TPDamageTypeAirplaneMachineGun extends TPDamageTypeImpact;

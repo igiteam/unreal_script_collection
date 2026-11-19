@@ -1,0 +1,43 @@
+class CommandInterfaceStaticCommands_MP extends CommandInterfaceStaticCommands
+    config(PlayerInterface_Command_MP);
+
+// Decompiled with UE Explorer.
+defaultproperties
+{
+    StaticCommand[0]="Command_Command_CancelMP"
+    StaticCommand[1]="Command_Response_Cancel"
+    StaticCommand[2]="Command_Response_Roger"
+    StaticCommand[3]="Command_Response_OnIt"
+    StaticCommand[4]="Command_Response_CopyThat"
+    StaticCommand[5]="Command_Response_WithYou"
+    StaticCommand[6]="Command_Response_Negative"
+    StaticCommand[7]="Command_Response_CantDoThat"
+    StaticCommand[8]="Command_Response_Clear"
+    StaticCommand[9]="Command_Response_LetsMove"
+    StaticCommand[10]="Command_Response_GoGoGo"
+    StaticCommand[11]="Command_Response_Trailers"
+    StaticCommand[12]="Command_RapidDeployment_Cancel"
+    StaticCommand[13]="Command_RapidDeployment_BombDefused"
+    StaticCommand[14]="Command_RapidDeployment_FoundABomb"
+    StaticCommand[15]="Command_RapidDeployment_GuardIt"
+    StaticCommand[16]="Command_RapidDeployment_WhereAreActiveBombs"
+    StaticCommand[17]="Command_RapidDeployment_GetToBombs"
+    StaticCommand[18]="Command_VIPEscort_Cancel"
+    StaticCommand[19]="Command_VIPEscort_StayWithTheVIP"
+    StaticCommand[20]="Command_VIPEscort_WhereIsTheVIP"
+    StaticCommand[21]="Command_VIPEscort_StayBehindMe"
+    StaticCommand[22]="Command_VIPEscort_WhereIsEscape"
+    StaticCommand[23]="Command_VIPEscort_DontShootVIP"
+    StaticCommand[24]="Command_General_Cancel"
+    StaticCommand[25]="Command_General_NeedBackup"
+    StaticCommand[26]="Command_General_ImHurt"
+    StaticCommand[27]="Command_General_TakePoint"
+    StaticCommand[28]="Command_General_TakeRearGuard"
+    StaticCommand[29]="Command_General_OutOfTheWay"
+    StaticCommand[30]="Command_General_StayClose"
+    StaticCommand[31]="Command_General_SlowDown"
+    StaticCommand[32]="Command_General_IllCoverYou"
+    StaticCommand[33]="Command_General_FriendlyWatchIt"
+    StaticCommand[34]="Command_General_WatchYourFire"
+    StaticCommand[35]="Command_General_ArrestThem"
+}

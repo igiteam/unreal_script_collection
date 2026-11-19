@@ -1,0 +1,1 @@
+class TPDamageTypeImpactShell extends TPDamageTypeImpact;

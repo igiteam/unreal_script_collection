@@ -1,0 +1,2 @@
+class TPDMLanGameSettings extends TPDMOnlineGameSettings;
+

@@ -1,0 +1,1 @@
+class MOHAM18RecoillessRifleMP extends MOHAM18RecoillessRifle;

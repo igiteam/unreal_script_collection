@@ -1,0 +1,2 @@
+class TMTankProjExplosionLight extends TMRocketExplosionLight;
+

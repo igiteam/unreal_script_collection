@@ -1,0 +1,1 @@
+class SkyAirshipDoorPanel extends SkyLimitedUseInteractor;

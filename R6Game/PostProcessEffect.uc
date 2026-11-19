@@ -1,0 +1,1 @@
+class PostProcessEffect extends Object;

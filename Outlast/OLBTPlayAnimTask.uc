@@ -1,0 +1,20 @@
+/**
+ * Copyright 2012 Red Barrels, Inc. All Rights Reserved.
+ */
+class OLBTPlayAnimTask extends OLBTTask
+	native(AI);
+
+cpptext
+{
+	virtual void OnInitialize();
+	virtual EStatus Update( FLOAT DeltaSeconds, TArray<FBehaviorState>* RootState = NULL, TArray<FBehaviorState>* CurrentState = NULL );
+
+	virtual UBOOL IsLatentTask() { return TRUE; }
+
+protected:
+	const FAnimData* GetRandomAnimation();
+}
+
+defaultproperties
+{
+}

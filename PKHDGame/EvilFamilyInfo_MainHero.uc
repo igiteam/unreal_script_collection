@@ -1,0 +1,1 @@
+class EvilFamilyInfo_MainHero extends EvilFamilyInfoBase;

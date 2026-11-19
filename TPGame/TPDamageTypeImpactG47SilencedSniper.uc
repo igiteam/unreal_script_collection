@@ -1,0 +1,1 @@
+class TPDamageTypeImpactG47SilencedSniper extends TPDamageTypeImpactRifle;

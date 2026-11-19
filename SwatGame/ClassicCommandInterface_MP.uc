@@ -1,0 +1,32 @@
+class ClassicCommandInterface_MP extends ClassicCommandInterface
+    config(PlayerInterface_Command_MP);
+
+simulated function CheckTeam()
+{
+    //in MP, the CI team should always be the Element, so the default is acceptable
+}
+
+
+
+
+
+
+
+
+
+
+// Decompiled with UE Explorer.
+defaultproperties
+{
+    ElementString="What Should Go Here?"
+    RedTeamString="Red Team -"
+    BlueTeamString="Blue Team -"
+    BackString="Backspace: Main Menu"
+    ContextsListClass=Class'CommandInterfaceContextsList_MP'
+    MenuInfoClass=Class'CommandInterfaceMenuInfo_MP'
+    StaticCommandsClass=Class'CommandInterfaceStaticCommands_MP'
+    CommandClass=Class'Command_MP'
+    Range=2000.0000000
+    DoorRelatedContextClass=Class'CommandInterfaceDoorRelatedContext_MP'
+    ContextClass=Class'CommandInterfaceContext_MP'
+}

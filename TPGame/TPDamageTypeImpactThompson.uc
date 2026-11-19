@@ -1,0 +1,1 @@
+class TPDamageTypeImpactThompson extends TPDamageTypeImpactSMG;

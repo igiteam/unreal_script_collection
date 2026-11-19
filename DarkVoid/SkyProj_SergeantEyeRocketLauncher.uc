@@ -1,0 +1,1 @@
+class SkyProj_SergeantEyeRocketLauncher extends SkyProjectile;

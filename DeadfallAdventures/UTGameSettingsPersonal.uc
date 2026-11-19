@@ -1,0 +1,1 @@
+class UTGameSettingsPersonal extends UTGameSettingsCommon;

@@ -1,0 +1,1 @@
+class SPAnimFourWayReloadNode extends SPAnimFourWayAimNode;

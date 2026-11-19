@@ -1,0 +1,2 @@
+class TPPickupSterling extends TPPickupFactory;
+

@@ -1,0 +1,2 @@
+class WehrmachtCanteen extends TPSkeletalMeshPickup;
+

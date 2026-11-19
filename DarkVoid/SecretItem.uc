@@ -1,0 +1,1 @@
+class SecretItem extends SkyInventory;

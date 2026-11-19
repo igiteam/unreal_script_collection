@@ -1,0 +1,1 @@
+class SPWeaponPickupFactoryTrigger extends SPPickupTrigger;

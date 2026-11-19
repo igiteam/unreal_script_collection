@@ -1,0 +1,1 @@
+class SPSquadFireDrake extends SPSquad;

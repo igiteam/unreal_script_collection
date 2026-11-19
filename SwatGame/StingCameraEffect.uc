@@ -1,0 +1,162 @@
+class StingCameraEffect extends SwatCameraEffect
+    config(SwatEquipment)
+	native
+	noexport
+    dependson(StingEffectParams);
+
+var protected byte		BlurAlpha;
+
+var private const transient int 	RenderTargets[3];   //TMC Note: this must match the size in SwatCameraEffects.h
+var private       transient float	LastFrameTime;
+
+var protected float       FadeInTime;   // time to fade in the effect in seconds
+var protected float       FadeOutTime;  // time to fade out the effect in seconds
+var protected float       DoubleVisionTime; // time to see double
+var protected float       DoubleVisionFadeOutTime; // time to fade out double vision
+
+var protected Bool        bBlurTime;      // apply motion blur over time or not.
+var protected int         PassOneDivide;  // shrink the video res by this amount compared to the
+								          // full screen on the first pass
+var protected int         PassTwoDivide;  // shrink the video res by this amount compared to the
+								          // full screen on the second pass
+var protected float       MaxBlurFrameTime; // max time in seconds for the blur to last (should be around .1 or .2)
+
+var protected SwatGamePlayerController PlayerController; // used to get some parameters for the effect
+var private const transient int noise; // native PerlinNoise object pointer for shifting the frame around
+
+var protected float       ZoomInFraction;  // the frame is zoomed in by this fraction during the effect
+var protected float       NoiseAmplitude;  // amplitude of the noise applied to the corners while zoomed in 
+                                           // (from 0 to 1, where 1 means motion across the entire image width)
+var protected float       NoiseRate;       // Speed of the noise motion on the corners (in noise cycles per second)
+var protected float       DoubleVisionNoiseAmplitude;
+var protected float       DoubleVisionNoiseRate;
+
+var protected Plane       TintColor;       // Color used to tint the view at the beginning of the effect
+var protected float       TintTime;
+var protected float       TintFadeOutTime;
+
+var string StingGrenadeParamsClassName;            // Class name for the default parameters class for StingGrenades
+var private class<StingEffectParams> StingGrenadeParamsClass;
+var string LessLethalShotgunParamsClassName;       // Class name for the default parameters class Less Lethal Shotgun bean bag projectiles
+var private class<StingEffectParams> LessLethalShotgunParamsClass;
+
+var protected const transient float       StartTime;         // Native use only
+var protected const transient float       Duration;          // Native use only
+var protected transient float             EffectAlpha;       // Native use only
+var protected transient float             DoubleVisionAlpha; // Native use only
+var protected transient float             TintAlpha;         // Native use only
+
+function Initialize(SwatGamePlayerController inPlayerController)
+{
+	// load the defaults class
+    local object pclass;
+
+    pclass = DynamicLoadObject(StingGrenadeParamsClassName, class'Class');
+    assert(pclass != None);
+    StingGrenadeParamsClass = class<StingEffectParams>(pclass);
+
+    pclass = DynamicLoadObject(LessLethalShotgunParamsClassName, class'Class');
+    assert(pclass != None);
+    LessLethalShotgunParamsClass = class<StingEffectParams>(pclass);
+
+    PlayerController = inPlayerController;
+}
+
+function OnAdded()
+{
+	local class<StingEffectParams> ParamsClass;
+	assert(StingGrenadeParamsClass      != None);
+	assert(LessLethalShotgunParamsClass != None);
+	assert(PlayerController             != None);
+
+
+	if (PlayerController != None &&
+		SwatPlayer(PlayerController.ViewTarget) != None &&
+		SwatPlayer(PlayerController.ViewTarget).LastStingWeapon == LessLethalShotgun)
+	{
+		ParamsClass = LessLethalShotgunParamsClass;
+	}
+	else 
+	{
+		ParamsClass = StingGrenadeParamsClass;
+	}
+
+	BlurAlpha                  = ParamsClass.Default.BlurAlpha;
+	FadeInTime                 = ParamsClass.Default.FadeInTime;
+	FadeOutTime                = ParamsClass.Default.FadeOutTime;
+	DoubleVisionTime           = ParamsClass.Default.DoubleVisionTime;
+	DoubleVisionFadeOutTime    = ParamsClass.Default.DoubleVisionFadeOutTime;
+
+	bBlurTime                  = ParamsClass.Default.bBlurTime;
+	PassOneDivide              = ParamsClass.Default.PassOneDivide;
+	PassTwoDivide              = ParamsClass.Default.PassTwoDivide;
+	MaxBlurFrameTime           = ParamsClass.Default.MaxBlurFrameTime;
+	ZoomInFraction             = ParamsClass.Default.ZoomInFraction;
+	NoiseAmplitude             = ParamsClass.Default.NoiseAmplitude;
+	NoiseRate                  = ParamsClass.Default.NoiseRate;
+	DoubleVisionNoiseAmplitude = ParamsClass.Default.DoubleVisionNoiseAmplitude;
+	DoubleVisionNoiseRate      = ParamsClass.Default.DoubleVisionNoiseRate;
+
+	TintColor                  = ParamsClass.Default.TintColor;
+	TintTime                   = ParamsClass.Default.TintTime;
+	TintFadeOutTime            = ParamsClass.Default.TintFadeOutTime;
+	
+	if (PlayerController.Level.TimeSeconds > (StartTime + Duration))
+	{
+		// initialize the LastFrameTime before the effect actually
+		// renders a frame so that you won't get a huge
+		// deltaT on the first frame. (see SwatCameraEffects.cpp)
+		LastFrameTime              = PlayerController.Level.TimeSeconds;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Decompiled with UE Explorer.
+defaultproperties
+{
+    BlurAlpha=20
+    FadeInTime=0.2000000
+    FadeOutTime=2.5000000
+    DoubleVisionTime=2.5000000
+    DoubleVisionFadeOutTime=0.5000000
+    bBlurTime=true
+    PassOneDivide=2
+    PassTwoDivide=2
+    MaxBlurFrameTime=2.0000000
+    ZoomInFraction=0.1000000
+    NoiseAmplitude=0.1000000
+    NoiseRate=1.0000000
+    DoubleVisionNoiseAmplitude=0.2500000
+    DoubleVisionNoiseRate=2.2000000
+    TintColor=(W=1.0000000,X=1.0000000,Y=0.8000000,Z=0.5000000)
+    TintTime=0.5000000
+    TintFadeOutTime=0.2500000
+    StingGrenadeParamsClassName="SwatCameraEffects.DesignerStingParams"
+    LessLethalShotgunParamsClassName="SwatCameraEffects.DesignerLessLethalSGParams"
+}

@@ -1,0 +1,1 @@
+class TPDamageTypeImpactHenry extends TPDamageTypeImpactRifle;

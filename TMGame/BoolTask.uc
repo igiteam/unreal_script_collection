@@ -1,0 +1,1 @@
+class BoolTask extends CoreTask;

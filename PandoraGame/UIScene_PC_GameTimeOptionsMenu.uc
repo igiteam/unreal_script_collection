@@ -1,0 +1,1 @@
+class UIScene_PC_GameTimeOptionsMenu extends UIScene_OptionsMenu;

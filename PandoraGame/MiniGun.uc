@@ -1,0 +1,1 @@
+class MiniGun extends MountedWeapon;

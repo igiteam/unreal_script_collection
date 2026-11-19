@@ -1,0 +1,1 @@
+class MOHAScriptedDeathDamageType extends MOHADamageType;

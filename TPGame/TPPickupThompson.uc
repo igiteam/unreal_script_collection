@@ -1,0 +1,2 @@
+class TPPickupThompson extends TPPickupFactory;
+

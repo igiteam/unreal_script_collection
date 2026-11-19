@@ -1,0 +1,2 @@
+class TPHealthItemCanteen extends TPHealthItem;
+

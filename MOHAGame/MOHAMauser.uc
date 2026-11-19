@@ -1,0 +1,1 @@
+class MOHAMauser extends Object;

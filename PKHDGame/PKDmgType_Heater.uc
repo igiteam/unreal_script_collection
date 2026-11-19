@@ -1,0 +1,19 @@
+class PKDmgType_Heater extends PKDmgType_Base;
+
+defaultproperties
+{
+    DamageWeaponClass=Class'PKWeap_Boltgun_Base'
+    DamageWeaponFireMode=1
+    DeathString="`o warmed by `k's heater"
+    ImpactTypeExplosionID=EImpactTypeExplosion.ITE_Heater
+    // Reference: ForceFeedbackWaveform'Default__PKDmgType_Heater.ForceFeedbackWaveform0'
+    // Archetype: ForceFeedbackWaveform'Default__PKDmgType_Base.ForceFeedbackWaveform0'
+    begin object name="ForceFeedbackWaveform0"
+    end object
+    DamagedFFWaveform=ForceFeedbackWaveform0
+    // Reference: ForceFeedbackWaveform'Default__PKDmgType_Heater.ForceFeedbackWaveform1'
+    // Archetype: ForceFeedbackWaveform'Default__PKDmgType_Base.ForceFeedbackWaveform1'
+    begin object name="ForceFeedbackWaveform1"
+    end object
+    KilledFFWaveform=ForceFeedbackWaveform1
+}

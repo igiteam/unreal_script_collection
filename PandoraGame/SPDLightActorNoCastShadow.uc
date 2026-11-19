@@ -1,0 +1,1 @@
+class SPDLightActorNoCastShadow extends SPDLightActor;

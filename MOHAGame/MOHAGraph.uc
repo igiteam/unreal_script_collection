@@ -1,0 +1,1 @@
+class MOHAGraph extends DebugGraph;

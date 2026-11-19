@@ -1,0 +1,1 @@
+class SPDestinationPathNode extends SPPathNode;

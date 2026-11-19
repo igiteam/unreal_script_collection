@@ -1,0 +1,30 @@
+class R6WeaponAnimConfigSubP90 extends R6WeaponAnimConfigSMG
+    abstract;
+
+defaultproperties
+{
+    m_FPReloadTacticAnim="FPReloadP90Tactical"
+    m_FPReloadEmptyAnim="FPReloadP90Empty"
+    m_TPReloadTacticAnim="ReadyReloadP90"
+    m_TPReloadEmptyAnim="ReadyReloadP90"
+    m_WFPReloadTacticAnim="FPP90ReloadTactical"
+    m_WFPReloadEmptyAnim="FPP90ReloadEmpty"
+    m_bShootingDontNeedAdditiveStance=true
+    m_FPStanceAimAddAnim="FPStanceP90Aim"
+    m_FPStanceReadyAddAnim="FPStanceP90Ready"
+    m_FPStanceZoomAddAnim="FPStanceP90Zoom"
+    m_FPNormalSingleMinRec="FPFireSingleP90MinRec"
+    m_FPNormalBurstCycleMinRec="FPFireBurstP90CycleMinRec"
+    m_FPNormalBurstEndMinRec="FPFireBurstP90EndMinRec"
+    m_FPZoomSingleMinRec="FPZoomFireSingleP90MinRec"
+    m_FPZoomBurstCycleMinRec="FPZoomFireBurstP90CycleMinRec"
+    m_FPZoomBurstEndMinRec="FPZoomFireBurstP90EndMinRec"
+    m_FPSuppressorAnim="FPSuppressP90"
+    m_FPUnSuppressorAnim="FPUnSuppressP90"
+    m_TCSuppressorAnim="ReadySuppressorP90On"
+    m_WFPSuppressorAnim="FPP90Suppress"
+    m_WFPUnSuppressorAnim="FPP90UnSuppress"
+    m_WTPSuppressorAnim="StandReadySuppressorP90On"
+    m_eWeaponHoldType=7
+    m_eMagHoldType=3
+}

@@ -1,0 +1,1 @@
+class SkyPawnSoundGroup_MaxValenti extends SkyPawnSoundGroup;

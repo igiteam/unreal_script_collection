@@ -1,0 +1,2 @@
+class ZsuMuzzleLight extends MuzzleLight;
+

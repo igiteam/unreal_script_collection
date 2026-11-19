@@ -1,0 +1,1 @@
+class EvilPawnSoundGroup_Skeleton extends EvilPawnSoundGroup_Base;

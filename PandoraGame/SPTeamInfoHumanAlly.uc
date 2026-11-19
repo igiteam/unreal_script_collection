@@ -1,0 +1,1 @@
+class SPTeamInfoHumanAlly extends SPTeamInfoAlly;

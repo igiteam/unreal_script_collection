@@ -1,0 +1,1 @@
+class UTTrajectoryReachSpec extends UDKTrajectoryReachSpec;

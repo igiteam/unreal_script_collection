@@ -1,0 +1,1 @@
+class R6WeaponAnimConfigRPG7 extends R6WeaponAnimConfigRocketLauncher;

@@ -1,0 +1,1 @@
+class MOHATempAISniper extends Object;

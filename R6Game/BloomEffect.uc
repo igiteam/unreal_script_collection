@@ -1,0 +1,1 @@
+class BloomEffect extends PostProcessEffect;

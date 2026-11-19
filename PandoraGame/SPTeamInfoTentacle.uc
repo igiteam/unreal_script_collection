@@ -1,0 +1,1 @@
+class SPTeamInfoTentacle extends SPTeamInfoCreature;

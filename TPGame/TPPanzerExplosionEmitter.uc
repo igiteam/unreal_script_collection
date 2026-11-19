@@ -1,0 +1,2 @@
+class TPPanzerExplosionEmitter extends TPReplicatedEmitter;
+

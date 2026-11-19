@@ -1,0 +1,1 @@
+class TPDamageTypeImpactBoat extends TPDamageTypeImpact;

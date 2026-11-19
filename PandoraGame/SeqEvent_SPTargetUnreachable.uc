@@ -1,0 +1,1 @@
+class SeqEvent_SPTargetUnreachable extends SequenceEvent;

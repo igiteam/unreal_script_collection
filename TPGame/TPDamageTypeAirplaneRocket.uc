@@ -1,0 +1,1 @@
+class TPDamageTypeAirplaneRocket extends TPDamageTypeImpact;

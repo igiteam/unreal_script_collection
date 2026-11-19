@@ -1,0 +1,1 @@
+class SkyMovableAmbientSound extends AmbientSound;

@@ -1,0 +1,1 @@
+class MOHACookedGrenadeDamageType extends MOHAGrenadeDamageType;

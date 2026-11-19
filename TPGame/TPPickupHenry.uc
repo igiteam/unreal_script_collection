@@ -1,0 +1,2 @@
+class TPPickupHenry extends TPPickupFactory;
+

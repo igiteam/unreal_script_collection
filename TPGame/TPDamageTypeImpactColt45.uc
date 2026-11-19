@@ -1,0 +1,1 @@
+class TPDamageTypeImpactColt45 extends TPDamageTypeImpact;

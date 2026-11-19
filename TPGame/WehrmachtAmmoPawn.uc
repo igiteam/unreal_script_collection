@@ -1,0 +1,2 @@
+class WehrmachtAmmoPawn extends WehrmachtPawn;
+

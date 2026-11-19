@@ -1,0 +1,2 @@
+class TPPickupSilencedPistol extends TPPickupFactory;
+

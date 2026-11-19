@@ -1,0 +1,1 @@
+class TPDamageTypeImpactShotgun extends TPDamageTypeImpactShell;

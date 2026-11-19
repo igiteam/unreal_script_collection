@@ -1,0 +1,1 @@
+class MOHATankCoaxWeapon extends Object;

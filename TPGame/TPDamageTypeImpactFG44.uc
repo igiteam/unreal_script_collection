@@ -1,0 +1,1 @@
+class TPDamageTypeImpactFG44 extends TPDamageTypeImpactRifle;

@@ -1,0 +1,1 @@
+class SkyVehicleExplosionEmitter extends SkyEmitter;

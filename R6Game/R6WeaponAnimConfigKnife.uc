@@ -1,0 +1,1 @@
+class R6WeaponAnimConfigKnife extends R6WeaponAnimConfig;

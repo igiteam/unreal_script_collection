@@ -1,0 +1,1 @@
+class SPTeamInfoBulletGenerator extends SPTeamInfoCreature;

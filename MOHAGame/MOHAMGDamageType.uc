@@ -1,0 +1,1 @@
+class MOHAMGDamageType extends MOHABulletDamageType;

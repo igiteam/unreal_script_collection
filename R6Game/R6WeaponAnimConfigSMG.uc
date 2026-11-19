@@ -1,0 +1,36 @@
+class R6WeaponAnimConfigSMG extends R6WeaponAnimConfig
+    abstract;
+
+defaultproperties
+{
+    m_TPReloadTacticAnim="ReadyReloadMG"
+    m_TPReloadEmptyAnim="ReadyReloadMG"
+    m_FPStanceAimAnim="FPStanceMGAim"
+    m_FPStanceReadyAnim="FPStanceMGReady"
+    m_FPStanceZoomAnim="FPStanceMGZoom"
+    m_FPDrawAnim="FPDrawMG"
+    m_FPHolsterAnim="FPHolsterMG"
+    m_FPPickupAnim="FPDrawMG"
+    m_FPNormalSingleMinRec="FPFireSingleMGMinRec"
+    m_FPNormalSingleMedRec="FPFireSingleMGMedRec"
+    m_FPNormalSingleMaxRec="FPFireSingleMGMaxRec"
+    m_FPNormalBurstCycleMinRec="FPFireBurstMGCycleMinRec"
+    m_FPNormalBurstCycleMedRec="FPFireBurstMGCycleMedRec"
+    m_FPNormalBurstCycleMaxRec="FPFireBurstMGCycleMaxRec"
+    m_FPNormalBurstEndMinRec="FPFireBurstMGEndMinRec"
+    m_FPNormalBurstEndMedRec="FPFireBurstMGEndMedRec"
+    m_FPNormalBurstEndMaxRec="FPFireBurstMGEndMaxRec"
+    m_FPZoomSingleMinRec="FPZoomFireSingleMGMinRec"
+    m_FPZoomSingleMedRec="FPZoomFireSingleMGMedRec"
+    m_FPZoomSingleMaxRec="FPZoomFireSingleMGMaxRec"
+    m_FPZoomBurstCycleMinRec="FPZoomFireBurstMGCycleMinRec"
+    m_FPZoomBurstCycleMedRec="FPZoomFireBurstMGCycleMedRec"
+    m_FPZoomBurstCycleMaxRec="FPZoomFireBurstMGCycleMaxRec"
+    m_FPZoomBurstEndMinRec="FPZoomFireBurstMGEndMinRec"
+    m_FPZoomBurstEndMedRec="FPZoomFireBurstMGEndMedRec"
+    m_FPZoomBurstEndMaxRec="FPZoomFireBurstMGEndMaxRec"
+    m_TPSuppressorAnim="ReadySuppressorMGOn"
+    m_TCSuppressorAnim="ReadySuppressorMGOn"
+    m_FPZoomIn="FPZoomInMG"
+    m_FPZoomOut="FPZoomOutMG"
+}

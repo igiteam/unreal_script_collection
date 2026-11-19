@@ -1,0 +1,1 @@
+class UTGameSearchDM extends UTGameSearchCommon;

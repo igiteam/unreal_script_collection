@@ -1,0 +1,1 @@
+class SPCardInterpActor extends InterpActor;

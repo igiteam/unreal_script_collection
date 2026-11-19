@@ -1,0 +1,1 @@
+class PKTeamSayMsg extends PKSayMsg;

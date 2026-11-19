@@ -1,0 +1,2 @@
+class OLMapInfo extends MapInfo;
+

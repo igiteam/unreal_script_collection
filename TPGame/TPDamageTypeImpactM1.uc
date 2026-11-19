@@ -1,0 +1,1 @@
+class TPDamageTypeImpactM1 extends TPDamageTypeImpactRifle;

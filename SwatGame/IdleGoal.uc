@@ -1,0 +1,24 @@
+///////////////////////////////////////////////////////////////////////////////
+// IdleGoal.uc - IdleGoal class
+// this low priority goal is a permanent goal for all AIs
+// there are a number of animator and procedural (coded) actions that can satisfy it
+
+class IdleGoal extends SwatCharacterGoal;
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+// Decompiled with UE Explorer.
+defaultproperties
+{
+    Priority=30
+    goalName="Idle"
+    bPermanent=true
+}

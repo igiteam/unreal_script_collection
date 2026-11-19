@@ -1,0 +1,2 @@
+class TPDroppedPickupSterling extends TPDroppedPickupWeapon;
+

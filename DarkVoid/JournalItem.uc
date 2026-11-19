@@ -1,0 +1,1 @@
+class JournalItem extends SkyInventory;

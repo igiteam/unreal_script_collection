@@ -1,0 +1,1 @@
+class TPDamageTypeImpactMG48Karbine extends TPDamageTypeImpact;

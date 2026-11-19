@@ -1,0 +1,1 @@
+class SkyKnightNavigationPoint extends SkyNavigationPoint;

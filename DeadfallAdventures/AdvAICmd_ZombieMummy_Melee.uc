@@ -1,0 +1,1 @@
+class AdvAICmd_ZombieMummy_Melee extends AdvAICmd_AztecMummy_Melee within AdvAI_ZombieMummy;

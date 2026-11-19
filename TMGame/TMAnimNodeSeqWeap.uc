@@ -1,0 +1,20 @@
+/**
+ *	Copyright 1998-2009 Epic Games, Inc. All Rights Reserved.
+ *	AnimNodeSequence which changes its animation based on the weapon anim type.
+ */
+
+class TMAnimNodeSeqWeap extends TMAnimNodeSequence
+	native(Animation);
+
+var()	name	DefaultAnim;
+var()	name	DualPistolAnim;
+var()	name	SinglePistolAnim;
+var()	name	ShoulderRocketAnim;
+var()	name	StingerAnim;
+
+// (cpptext)
+// (cpptext)
+// (cpptext)
+// (cpptext)
+// (cpptext)
+// (cpptext)

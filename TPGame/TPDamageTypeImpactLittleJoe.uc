@@ -1,0 +1,1 @@
+class TPDamageTypeImpactLittleJoe extends TPDamageTypeImpact;

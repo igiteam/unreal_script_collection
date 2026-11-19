@@ -1,0 +1,1 @@
+class TextureCompressionDefault extends TextureCompressionProfile;

@@ -1,0 +1,1 @@
+class MOHABarMP extends MOHABar;

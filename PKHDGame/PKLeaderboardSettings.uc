@@ -1,0 +1,1 @@
+class PKLeaderboardSettings extends PKLeaderboardSettingsBase;

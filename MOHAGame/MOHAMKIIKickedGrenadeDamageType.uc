@@ -1,0 +1,1 @@
+class MOHAMKIIKickedGrenadeDamageType extends MOHAMKIIGrenadeDamageType;

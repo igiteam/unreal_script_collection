@@ -1,0 +1,1 @@
+class SPPickupFlame extends SPPickup;

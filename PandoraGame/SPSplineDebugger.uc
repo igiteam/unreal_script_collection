@@ -1,0 +1,1 @@
+class SPSplineDebugger extends Trigger;

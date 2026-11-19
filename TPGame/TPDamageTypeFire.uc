@@ -1,0 +1,1 @@
+class TPDamageTypeFire extends TPDamageType;

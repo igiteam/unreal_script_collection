@@ -1,0 +1,10 @@
+class Molotov_Cocktail_FPGrenadeMesh extends SASFPWeaponMeshActor;
+
+
+
+// Decompiled with UE Explorer.
+defaultproperties
+{
+    mPullPinAnim="WEAPON_PullPin"
+    Mesh=SkeletalMesh'WpAn.WEAPON_GRENADE'
+}

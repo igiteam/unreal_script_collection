@@ -1,0 +1,1 @@
+class PKGameDeathMatchSettings extends PKGameSettingsCommon;

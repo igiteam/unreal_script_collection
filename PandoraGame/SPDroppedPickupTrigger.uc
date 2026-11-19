@@ -1,0 +1,1 @@
+class SPDroppedPickupTrigger extends SPPickupTrigger;

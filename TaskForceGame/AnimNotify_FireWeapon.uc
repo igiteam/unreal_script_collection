@@ -1,0 +1,19 @@
+class AnimNotify_FireWeapon extends AnimNotify_Scripted;
+
+// Used to make an actor act like it's firing its weapon.  
+// Does NOT fire the weapon directly.
+event Notify( Actor Owner )
+{
+	if( Owner.IsA('Pawn') )
+	{
+		// fake fire - play weapon effect, but no real shot
+		Pawn(Owner).bIgnorePlayFiring = true;
+		WeaponAttachment(Pawn(Owner).Weapon.ThirdPersonActor).ThirdPersonEffects();
+		if ( Pawn(Owner).Weapon.FireSound != None )
+			Pawn(Owner).Weapon.PlaySound(Pawn(Owner).Weapon.FireSound, SLOT_None, 1.0);
+	}
+	else
+	{
+		Log("Error: "$self$" should be used on Pawns. ");
+	}
+}

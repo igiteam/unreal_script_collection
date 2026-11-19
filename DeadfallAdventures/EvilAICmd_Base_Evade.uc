@@ -1,0 +1,1 @@
+class EvilAICmd_Base_Evade extends EvilAICmd_Base_Combat within EvilAIController;

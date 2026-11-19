@@ -1,0 +1,2 @@
+class TPTeamDMHud extends HUD;
+

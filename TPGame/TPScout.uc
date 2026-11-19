@@ -1,0 +1,2 @@
+class TPScout extends Scout;
+

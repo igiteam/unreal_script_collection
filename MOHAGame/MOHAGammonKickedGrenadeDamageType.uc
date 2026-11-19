@@ -1,0 +1,1 @@
+class MOHAGammonKickedGrenadeDamageType extends MOHAGammonGrenadeDamageType;

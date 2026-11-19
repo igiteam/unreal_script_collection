@@ -1,0 +1,1 @@
+class SkySeqAct_SetCurrentMusicTrack extends SequenceAction;

@@ -1,0 +1,1 @@
+class MOHATankGun extends Object;

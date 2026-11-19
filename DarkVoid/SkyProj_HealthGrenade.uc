@@ -1,0 +1,1 @@
+class SkyProj_HealthGrenade extends SkyProj_SecondaryItem;

@@ -1,0 +1,1 @@
+class SkyUnarmedCoverFalse extends SkyLimitedUseInteractor;

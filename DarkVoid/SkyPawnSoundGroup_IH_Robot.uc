@@ -1,0 +1,1 @@
+class SkyPawnSoundGroup_IH_Robot extends SkyPawnSoundGroup;

@@ -1,0 +1,1 @@
+class SkyInfoRequest_EnemyLocation extends SkyInfoRequest;

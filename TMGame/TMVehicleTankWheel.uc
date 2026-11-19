@@ -1,0 +1,2 @@
+class TMVehicleTankWheel extends TMVehicleWheel;
+

@@ -1,0 +1,1 @@
+class SeqAct_SpSetRagdoll extends SeqAct_SpSetRagdollBase;

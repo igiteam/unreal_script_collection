@@ -1,0 +1,1 @@
+class SeqAct_SpToggleCATAnimationAbility extends SeqAct_Toggle;

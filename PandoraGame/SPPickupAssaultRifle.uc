@@ -1,0 +1,1 @@
+class SPPickupAssaultRifle extends SPPickup;

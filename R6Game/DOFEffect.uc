@@ -1,0 +1,1 @@
+class DOFEffect extends PostProcessEffect;

@@ -1,0 +1,1 @@
+class SkySeqEvent_SabotageBombExplode extends SequenceEvent;

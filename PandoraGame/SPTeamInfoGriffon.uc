@@ -1,0 +1,1 @@
+class SPTeamInfoGriffon extends SPTeamInfoCreature;

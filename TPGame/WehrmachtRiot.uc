@@ -1,0 +1,2 @@
+class WehrmachtRiot extends WehrmachtPawn;
+

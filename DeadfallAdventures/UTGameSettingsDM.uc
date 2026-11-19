@@ -1,0 +1,1 @@
+class UTGameSettingsDM extends UTGameSettingsCommon;

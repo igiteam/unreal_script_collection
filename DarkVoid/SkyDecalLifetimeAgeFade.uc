@@ -1,0 +1,1 @@
+class SkyDecalLifetimeAgeFade extends DecalLifetimeAge;

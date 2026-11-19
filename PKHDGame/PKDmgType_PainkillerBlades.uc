@@ -1,0 +1,24 @@
+class PKDmgType_PainkillerBlades extends PKDmgType_Base;
+
+defaultproperties
+{
+    bNeverGibs=true
+    bThrowRagdoll=false
+    DamageWeaponClass=Class'PKWeap_Painkiller_Base'
+    DamageWeaponFireMode=1
+    DeathString="`o cut by `k's painkiller"
+    ImpactTypeExplosionID=EImpactTypeExplosion.ITE_Painkiller
+    KDamageImpulse=-100.0000000
+    KDeathVel=0.0000000
+    KDeathUpKick=0.0000000
+    // Reference: ForceFeedbackWaveform'Default__PKDmgType_PainkillerBlades.ForceFeedbackWaveform0'
+    // Archetype: ForceFeedbackWaveform'Default__PKDmgType_Base.ForceFeedbackWaveform0'
+    begin object name="ForceFeedbackWaveform0"
+    end object
+    DamagedFFWaveform=ForceFeedbackWaveform0
+    // Reference: ForceFeedbackWaveform'Default__PKDmgType_PainkillerBlades.ForceFeedbackWaveform1'
+    // Archetype: ForceFeedbackWaveform'Default__PKDmgType_Base.ForceFeedbackWaveform1'
+    begin object name="ForceFeedbackWaveform1"
+    end object
+    KilledFFWaveform=ForceFeedbackWaveform1
+}

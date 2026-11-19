@@ -1,0 +1,1 @@
+class SkyAirshipControlPanel extends SkyLimitedUseInteractor;

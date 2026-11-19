@@ -1,0 +1,2 @@
+class HDActorFactoryTarget extends ActorFactoryMover;
+

@@ -1,0 +1,3 @@
+
+class HDWeaponMuzzleFlashLight extends TMExplosionLight;
+

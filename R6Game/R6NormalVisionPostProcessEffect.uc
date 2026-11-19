@@ -1,0 +1,1 @@
+class R6NormalVisionPostProcessEffect extends R6MegaPostProcessEffect;

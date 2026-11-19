@@ -1,0 +1,1 @@
+class SeqAct_AmBxStopAllWindEffects extends SequenceAction;

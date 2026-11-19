@@ -1,0 +1,1 @@
+class SeqAct_AIStopForceFireAtTarget extends SequenceAction;

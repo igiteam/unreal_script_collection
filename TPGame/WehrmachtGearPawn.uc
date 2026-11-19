@@ -1,0 +1,2 @@
+class WehrmachtGearPawn extends WehrmachtPawn;
+

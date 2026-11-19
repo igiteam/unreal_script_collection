@@ -1,0 +1,2 @@
+class TPDroppedPickupPanzerStrike extends TPDroppedPickupWeapon;
+

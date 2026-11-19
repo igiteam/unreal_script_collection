@@ -1,0 +1,1 @@
+class MOHA_MKIIFragGrenadeMP extends MOHA_MKIIFragGrenade;

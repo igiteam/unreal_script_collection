@@ -1,0 +1,1 @@
+class R6EdgeBlurPostProcessEffect extends PostProcessEffect;

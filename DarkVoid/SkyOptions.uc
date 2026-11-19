@@ -1,0 +1,1 @@
+class SkyOptions extends Object;

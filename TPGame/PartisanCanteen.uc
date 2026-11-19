@@ -1,0 +1,2 @@
+class PartisanCanteen extends TPSkeletalMeshPickup;
+

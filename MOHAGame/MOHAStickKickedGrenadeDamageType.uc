@@ -1,0 +1,1 @@
+class MOHAStickKickedGrenadeDamageType extends MOHAStickGrenadeDamageType;

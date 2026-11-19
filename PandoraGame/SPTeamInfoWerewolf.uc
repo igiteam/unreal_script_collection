@@ -1,0 +1,1 @@
+class SPTeamInfoWerewolf extends SPTeamInfoCreature;

@@ -1,0 +1,1 @@
+class SPPickupShotgun extends SPPickup;

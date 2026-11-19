@@ -1,0 +1,1 @@
+class MOHAHUDFadeInImg extends MOHAHUDImg;

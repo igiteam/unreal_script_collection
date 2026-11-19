@@ -1,0 +1,1 @@
+class R6WeaponAnimConfigRocketLauncher extends R6WeaponAnimConfigSMG;

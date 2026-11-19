@@ -1,0 +1,1 @@
+class SkyInvPickup extends SkyPickup;

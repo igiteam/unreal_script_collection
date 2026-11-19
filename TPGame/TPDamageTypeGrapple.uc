@@ -1,0 +1,1 @@
+class TPDamageTypeGrapple extends TPDamageType;

@@ -1,0 +1,1 @@
+class SkyAnimNodePersonality extends SkyAnimNodeRandom;

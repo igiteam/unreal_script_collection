@@ -1,0 +1,29 @@
+///////////////////////////////////////////////////////////////////////////////
+// PatrolPoint.uc - PatrolPoint class
+// A point that AIs can patrol to, connectable to Unreal's pathfinding system
+
+class PatrolPoint extends Engine.PathNode
+	native;
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Variables
+
+// spawners that refer to us (for debugging purposes)
+var private array<SpawnerBase> ReferringSpawners;
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+// Decompiled with UE Explorer.
+defaultproperties
+{
+    bPropagatesSound=false
+    Texture=Texture'SWAT4editorTex.EnemyPatrolPoint'
+    bDirectional=true
+}

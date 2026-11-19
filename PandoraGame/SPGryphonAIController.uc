@@ -1,0 +1,1 @@
+class SPGryphonAIController extends SPAIController;

@@ -1,0 +1,1 @@
+class SPSkeletalMeshActorMATSpawnable extends SPSkeletalMeshActorMAT;

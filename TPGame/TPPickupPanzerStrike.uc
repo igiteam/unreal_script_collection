@@ -1,0 +1,2 @@
+class TPPickupPanzerStrike extends TPPickupFactory;
+

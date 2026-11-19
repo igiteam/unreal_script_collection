@@ -1,0 +1,1001 @@
+class SkyGame_Story extends SkyGame
+    native
+    config(Game);
+
+var bool bAllAmmoOnStart;
+var transient bool bAutomatedTest;
+var float AutomatedTestTime;
+
+function PreBeginPlay()
+{
+    super.PreBeginPlay();
+    CreateTeam(0);
+    CreateTeam(1);
+    Teams[0].AI.EnemyTeam = Teams[1];
+    Teams[1].AI.EnemyTeam = Teams[0];
+    //return;    
+}
+
+event PostLogin(PlayerController NewPlayer)
+{
+    local Actor A;
+
+    super.PostLogin(NewPlayer);
+    // End:0x27
+    if(LocalPlayer(NewPlayer.Player) == none)
+    {
+        return;
+    }
+    // End:0x4C
+    foreach AllActors(Class'Engine.Actor', A)
+    {
+        A.NotifyLocalPlayerTeamReceived();        
+    }    
+    //return;    
+}
+
+function NotifySpree(SkyPlayerReplicationInfo Other, int num)
+{
+    //return;    
+}
+
+function EndSpree(SkyPlayerReplicationInfo Killer, SkyPlayerReplicationInfo Other)
+{
+    //return;    
+}
+
+function FindNewObjectives(SkyGameObjective DisabledObjective)
+{
+    //return;    
+}
+
+function CreateTeam(int TeamIndex)
+{
+    local class<SkyTeamInfo> RosterClass;
+
+    // End:0x37
+    if(CustomTeamName[TeamIndex] != "")
+    {
+        RosterClass = class<SkyTeamInfo>(DynamicLoadObject(CustomTeamName[TeamIndex], Class'Core.Class'));        
+    }
+    else
+    {
+        RosterClass = class<SkyTeamInfo>(DynamicLoadObject(DefaultEnemyRosterClass, Class'Core.Class'));
+    }
+    Teams[TeamIndex] = Spawn(RosterClass);
+    Teams[TeamIndex].Initialize(int(0.5000000 * float(DesiredPlayerCount)));
+    Teams[TeamIndex].TeamIndex = TeamIndex;
+    Teams[TeamIndex].AI = Spawn(TeamAIType[TeamIndex]);
+    Teams[TeamIndex].AI.Team = Teams[TeamIndex];
+    GameReplicationInfo.SetTeam(TeamIndex, Teams[TeamIndex]);
+    //return;    
+}
+
+function SkyTeamInfo GetBotTeam(optional int TeamBots)
+{
+    return Teams[TeamBots];
+    //return ReturnValue;    
+}
+
+static function PrecacheGameAnnouncements(SkyAnnouncer Announcer)
+{
+    super.PrecacheGameAnnouncements(Announcer);
+    default.TeamScoreMessageClass.static.PrecacheGameAnnouncements(Announcer, default.Class);
+    //return;    
+}
+
+function int LevelRecommendedPlayers()
+{
+    return 1;
+    //return ReturnValue;    
+}
+
+function bool CheckMaxLives(PlayerReplicationInfo Scorer)
+{
+    local Controller C;
+    local PlayerReplicationInfo Living;
+    local bool bNoneLeft;
+
+    // End:0x18A
+    if(MaxLives > 0)
+    {
+        // End:0x38
+        if((Scorer != none) && !Scorer.bOutOfLives)
+        {
+            Living = Scorer;
+        }
+        bNoneLeft = true;
+        // End:0x140
+        foreach WorldInfo.AllControllers(Class'Engine.Controller', C)
+        {
+            // End:0x13F
+            if((((C.PlayerReplicationInfo != none) && C.bIsPlayer) && !C.PlayerReplicationInfo.bOutOfLives) && !C.PlayerReplicationInfo.bOnlySpectator)
+            {
+                // End:0xEC
+                if(Living == none)
+                {
+                    Living = C.PlayerReplicationInfo;
+                    // End:0x13F
+                    continue;
+                }
+                // End:0x13F
+                if((C.PlayerReplicationInfo != Living) && C.PlayerReplicationInfo.Team != Living.Team)
+                {
+                    bNoneLeft = false;
+                    // End:0x140
+                    break;
+                }
+            }            
+        }        
+        // End:0x18A
+        if(bNoneLeft)
+        {
+            // End:0x170
+            if(Living != none)
+            {
+                EndGame(Living, "LastMan");                
+            }
+            else
+            {
+                EndGame(Scorer, "LastMan");
+            }
+            return true;
+        }
+    }
+    return false;
+    //return ReturnValue;    
+}
+
+event InitGame(string Options, out string ErrorMessage)
+{
+    local string InOpt;
+    local class<SkyTeamAI> InType;
+
+    super.InitGame(Options, ErrorMessage);
+    InOpt = ParseOption(Options, "RedAI");
+    // End:0x6C
+    if(InOpt != "")
+    {
+        InType = class<SkyTeamAI>(DynamicLoadObject(InOpt, Class'Core.Class'));
+        // End:0x6C
+        if(InType != none)
+        {
+            TeamAIType[0] = InType;
+        }
+    }
+    InOpt = ParseOption(Options, "BlueAI");
+    // End:0xC9
+    if(InOpt != "")
+    {
+        InType = class<SkyTeamAI>(DynamicLoadObject(InOpt, Class'Core.Class'));
+        // End:0xC9
+        if(InType != none)
+        {
+            TeamAIType[1] = InType;
+        }
+    }
+    InOpt = ParseOption(Options, "AllRed");
+    // End:0xFA
+    if(InOpt != "")
+    {
+        bForceAllRed = true;
+    }
+    CustomTeamName[0] = ParseOption(Options, "RedTeam");
+    CustomTeamName[1] = ParseOption(Options, "BlueTeam");
+    // End:0x1C8
+    if((CustomTeamName[0] != "") || CustomTeamName[1] != "")
+    {
+        bCustomBots = true;
+        // End:0x195
+        if(CustomTeamName[0] == "")
+        {
+            CustomTeamName[0] = "SkyGame.UTTeamBlueConfigured";
+        }
+        // End:0x1C8
+        if(CustomTeamName[1] == "")
+        {
+            CustomTeamName[1] = "SkyGame.UTTeamRedConfigured";
+        }
+    }
+    InOpt = ParseOption(Options, "FF");
+    // End:0x201
+    if(InOpt != "")
+    {
+        FriendlyFireScale = FMin(1.0000000, float(InOpt));
+    }
+    InOpt = ParseOption(Options, "BalanceTeams");
+    // End:0x23E
+    if(InOpt != "")
+    {
+        bPlayersBalanceTeams = bool(InOpt);
+    }
+    InOpt = ParseOption(Options, "AutomatedTest");
+    // End:0x2CD
+    if(InOpt != "")
+    {
+        bAutomatedTest = true;
+        InOpt = ParseOption(Options, "AutomatedTestTime");
+        // End:0x2B7
+        if(InOpt != "")
+        {
+            AutomatedTestTime = float(InOpt);
+        }
+        SetTimer(AutomatedTestTime, false, 'ExitAutomatedTest');        
+    }
+    //return;    
+}
+
+function bool TooManyBots(Controller botToRemove)
+{
+    return false;
+    //return ReturnValue;    
+}
+
+function NotifyKilled(Controller Killer, Controller KilledPlayer, Pawn KilledPawn)
+{
+    Teams[0].AI.NotifyKilled(Killer, KilledPlayer, KilledPawn);
+    Teams[1].AI.NotifyKilled(Killer, KilledPlayer, KilledPawn);
+    //return;    
+}
+
+function bool CheckEndGame(PlayerReplicationInfo Winner, string Reason)
+{
+    local Controller P;
+    local bool bLastMan;
+
+    // End:0x90
+    if(bOverTime)
+    {
+        // End:0x1D
+        if((NumBots + NumPlayers) == 0)
+        {
+            return true;
+        }
+        bLastMan = true;
+        // End:0x84
+        foreach WorldInfo.AllControllers(Class'Engine.Controller', P)
+        {
+            // End:0x83
+            if((P.PlayerReplicationInfo != none) && !P.PlayerReplicationInfo.bOutOfLives)
+            {
+                bLastMan = false;
+                // End:0x84
+                break;
+            }            
+        }        
+        // End:0x90
+        if(bLastMan)
+        {
+            return true;
+        }
+    }
+    bLastMan = Reason ~= "LastMan";
+    // End:0xCD
+    if(!bLastMan && CheckModifiedEndGame(Winner, Reason))
+    {
+        return false;
+    }
+    // End:0x102
+    if(bTeamScoreRounds)
+    {
+        // End:0xFF
+        if(Winner != none)
+        {
+            Winner.Team.Score += float(1);
+        }        
+    }
+    else
+    {
+        // End:0x15D
+        if(!bLastMan && Teams[1].Score == Teams[0].Score)
+        {
+            // End:0x15B
+            if(!bOverTimeBroadcast)
+            {
+                StartupStage = 7;
+                PlayStartupMessage();
+                bOverTimeBroadcast = true;
+            }
+            return false;
+        }
+    }
+    // End:0x188
+    if(bLastMan)
+    {
+        GameReplicationInfo.Winner = Winner.Team;        
+    }
+    else
+    {
+        // End:0x1C9
+        if(Teams[1].Score > Teams[0].Score)
+        {
+            GameReplicationInfo.Winner = Teams[1];            
+        }
+        else
+        {
+            GameReplicationInfo.Winner = Teams[0];
+        }
+    }
+    // End:0x29F
+    if(Winner == none)
+    {
+        // End:0x29E
+        foreach WorldInfo.AllControllers(Class'Engine.Controller', P)
+        {
+            // End:0x29D
+            if(((P.PlayerReplicationInfo != none) && P.PlayerReplicationInfo.Team == GameReplicationInfo.Winner) && (Winner == none) || P.PlayerReplicationInfo.Score > Winner.Score)
+            {
+                Winner = P.PlayerReplicationInfo;
+            }            
+        }        
+    }
+    EndTime = WorldInfo.TimeSeconds + EndTimeDelay;
+    SetEndGameFocus(Winner);
+    return true;
+    //return ReturnValue;    
+}
+
+function SetEndGameFocus(PlayerReplicationInfo Winner)
+{
+    local Controller P;
+
+    // End:0x2F
+    if(Winner != none)
+    {
+        EndGameFocus = Controller(Winner.Owner).Pawn;
+    }
+    // End:0x4C
+    if(EndGameFocus != none)
+    {
+        EndGameFocus.bAlwaysRelevant = true;
+    }
+    // End:0xC4
+    foreach WorldInfo.AllControllers(Class'Engine.Controller', P)
+    {
+        P.GameHasEnded(EndGameFocus, (P.PlayerReplicationInfo != none) && P.PlayerReplicationInfo.Team == GameReplicationInfo.Winner);        
+    }    
+    //return;    
+}
+
+function bool CanSpectate(PlayerController Viewer, PlayerReplicationInfo ViewTarget)
+{
+    // End:0x22
+    if((ViewTarget == none) || ViewTarget.bOnlySpectator)
+    {
+        return false;
+    }
+    return Viewer.PlayerReplicationInfo.bOnlySpectator || ViewTarget.Team == Viewer.PlayerReplicationInfo.Team;
+    //return ReturnValue;    
+}
+
+function byte PickTeam(byte num, Controller C)
+{
+    local SkyTeamInfo NewTeam;
+
+    // End:0x2E
+    if(int(num) == int(255))
+    {
+        num = 0;
+        NewTeam = Teams[int(num)];        
+    }
+    else
+    {
+        // End:0x4E
+        if(PlayerController(C) != none)
+        {
+            NewTeam = Teams[0];            
+        }
+        else
+        {
+            NewTeam = Teams[int(num)];
+        }
+    }
+    return byte(NewTeam.TeamIndex);
+    //return ReturnValue;    
+}
+
+event BroadcastLocalizedTeam(int TeamIndex, Actor Sender, class<LocalMessage> Message, optional int Switch, optional PlayerReplicationInfo RelatedPRI_1, optional PlayerReplicationInfo RelatedPRI_2, optional Object OptionalObject)
+{
+    local PlayerController P;
+
+    // End:0x72
+    foreach WorldInfo.AllControllers(Class'Engine.PlayerController', P)
+    {
+        // End:0x71
+        if(P.PlayerReplicationInfo.Team == Sender)
+        {
+            P.ReceiveLocalizedMessage(Message, Switch, RelatedPRI_1, RelatedPRI_2, OptionalObject);
+        }        
+    }    
+    //return;    
+}
+
+function bool ChangeTeam(Controller Other, int num, bool bNewTeam)
+{
+    local SkyTeamInfo NewTeam, PendingTeam;
+
+    // End:0x20
+    if(bMustJoinBeforeStart && GameReplicationInfo.bMatchHasBegun)
+    {
+        return false;
+    }
+    // End:0x74
+    if(Other.IsA('PlayerController') && Other.PlayerReplicationInfo.bOnlySpectator)
+    {
+        Other.PlayerReplicationInfo.Team = none;
+        return true;
+    }
+    NewTeam = ((num < 255) ? Teams[int(PickTeam(byte(num), Other))] : none);
+    // End:0x29E
+    if((Other.PlayerReplicationInfo != none) && Other.PlayerReplicationInfo.Team == NewTeam)
+    {
+        // End:0x29C
+        if(((((num < 2) && num != NewTeam.TeamIndex) && !bPlayersVsBots) && PlayerController(Other) != none) && SkyTeamInfo(Other.PlayerReplicationInfo.Team) != none)
+        {
+            // End:0x277
+            if(PendingTeamSwap != none)
+            {
+                // End:0x197
+                if(PendingTeamSwap.bDeleteMe || (WorldInfo.TimeSeconds - SwapRequestTime) > 8.0000000)
+                {
+                    PendingTeamSwap = none;                    
+                }
+                else
+                {
+                    // End:0x277
+                    if(PendingTeamSwap.PlayerReplicationInfo.Team.TeamIndex == num)
+                    {
+                        PendingTeam = SkyTeamInfo(PendingTeamSwap.PlayerReplicationInfo.Team);
+                        // End:0x277
+                        if(PendingTeam != none)
+                        {
+                            SetTeam(PendingTeamSwap, SkyTeamInfo(Other.PlayerReplicationInfo.Team), true);
+                            // End:0x254
+                            if(PendingTeamSwap.Pawn != none)
+                            {
+                                PendingTeamSwap.Pawn.PlayerChangedTeam();
+                            }
+                            PendingTeamSwap = none;
+                            SetTeam(Other, PendingTeam, bNewTeam);
+                            return true;
+                        }
+                    }
+                }
+            }
+            PendingTeamSwap = PlayerController(Other);
+            SwapRequestTime = WorldInfo.TimeSeconds;
+        }
+        return false;
+    }
+    SetTeam(Other, NewTeam, bNewTeam);
+    return true;
+    //return ReturnValue;    
+}
+
+function SetTeam(Controller Other, SkyTeamInfo NewTeam, bool bNewTeam)
+{
+    local Actor A;
+
+    Other.StartSpot = none;
+    // End:0x8F
+    if((Other.PlayerReplicationInfo != none) && Other.PlayerReplicationInfo.Team != none)
+    {
+        Other.PlayerReplicationInfo.Team.RemoveFromTeam(Other);
+        Other.PlayerReplicationInfo.Team = none;
+    }
+    // End:0x18C
+    if((NewTeam == none) || (NewTeam != none) && NewTeam.AddToTeam(Other))
+    {
+        // End:0x140
+        if((NewTeam != none) && ((int(WorldInfo.NetMode) != int(NM_Standalone)) || PlayerController(Other) == none) || PlayerController(Other).Player != none)
+        {
+            BroadcastLocalizedMessage(GameMessageClass, 3, Other.PlayerReplicationInfo, none, NewTeam);
+        }
+        // End:0x18C
+        if(bNewTeam && PlayerController(Other) != none)
+        {
+            GameEvent('TeamChange', NewTeam.TeamIndex, Other.PlayerReplicationInfo);
+        }
+    }
+    // End:0x1E3
+    if((PlayerController(Other) != none) && LocalPlayer(PlayerController(Other).Player) != none)
+    {
+        // End:0x1E2
+        foreach AllActors(Class'Engine.Actor', A)
+        {
+            A.NotifyLocalPlayerTeamReceived();            
+        }        
+    }
+    //return;    
+}
+
+function PlayerStart ChoosePlayerStart(Controller Player, optional byte InTeam)
+{
+    local PlayerStart P;
+    local array<PlayerStart> PlayerStarts;
+
+    // End:0x44
+    foreach WorldInfo.AllNavigationPoints(Class'Engine.PlayerStart', P)
+    {
+        // End:0x43
+        if(P.bEnabled)
+        {
+            PlayerStarts[PlayerStarts.Length] = P;
+        }        
+    }    
+    return PickPlayerStart(PlayerStarts, Player);
+    //return ReturnValue;    
+}
+
+// Export USkyGame_Story::execPickPlayerStart(FFrame&, void* const)
+native function PlayerStart PickPlayerStart(array<PlayerStart> PlayerStarts, Controller Player);
+
+event bool IsSavedPlayerStart(NavigationPoint P, Controller Player)
+{
+    return false;
+    //return ReturnValue;    
+}
+
+function bool CheckScore(PlayerReplicationInfo Scorer)
+{
+    // End:0x17
+    if(CheckMaxLives(Scorer))
+    {
+        return false;        
+    }
+    else
+    {
+        // End:0x2C
+        if(!super(GameInfo).CheckScore(Scorer))
+        {
+            return false;            
+        }
+        else
+        {
+            // End:0x49
+            if(!bOverTime && GoalScore == 0)
+            {
+                return false;                
+            }
+            else
+            {
+                // End:0xB6
+                if(((Scorer != none) && Scorer.Team != none) && Scorer.Team.Score >= float(GoalScore))
+                {
+                    EndGame(Scorer, "teamscorelimit");
+                    return true;                    
+                }
+                else
+                {
+                    // End:0xEB
+                    if((Scorer != none) && bOverTime)
+                    {
+                        EndGame(Scorer, "timelimit");
+                        return true;                        
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    //return ReturnValue;    
+}
+
+function bool CriticalPlayer(Controller Other)
+{
+    // End:0x36
+    if((Other.PlayerReplicationInfo != none) && Other.PlayerReplicationInfo.bHasFlag)
+    {
+        return true;
+    }
+    return false;
+    //return ReturnValue;    
+}
+
+function Pawn FindVictimsTarget(Controller Other)
+{
+    local Vector Start, X, Y, Z;
+    local float Dist, Aim;
+    local Actor Target;
+
+    // End:0x45
+    if(((Other == none) || Other.Pawn == none) || Other.Pawn.Weapon == none)
+    {
+        return none;
+    }
+    GetAxes(Other.Pawn.GetViewRotation(), X, Y, Z);
+    Start = Other.Pawn.Location + (vect(0.0000000, 0.0000000, 1.0000000) * Other.Pawn.BaseEyeHeight);
+    Aim = 0.9700000;
+    Target = Other.PickTarget(Class'Engine.Pawn', Aim, Dist, X, Start, 4000.0000000);
+    return Pawn(Target);
+    //return ReturnValue;    
+}
+
+function bool NearGoal(Controller C)
+{
+    return false;
+    //return ReturnValue;    
+}
+
+function ScoreKill(Controller Killer, Controller Other)
+{
+    local Pawn Target;
+    local SkyPlayerReplicationInfo KillerPRI;
+
+    // End:0xB5
+    if(!Other.bIsPlayer || (Killer != none) && !Killer.bIsPlayer || Killer.PlayerReplicationInfo == none)
+    {
+        super.ScoreKill(Killer, Other);
+        // End:0xB3
+        if(((!bScoreTeamKills && Killer != none) && Killer.bIsPlayer) && MaxLives > 0)
+        {
+            CheckScore(Killer.PlayerReplicationInfo);
+        }
+        return;
+    }
+    // End:0x2F1
+    if(((Killer == none) || Killer == Other) || Killer.PlayerReplicationInfo.Team != Other.PlayerReplicationInfo.Team)
+    {
+        // End:0x2E1
+        if(Killer != none)
+        {
+            KillerPRI = SkyPlayerReplicationInfo(Killer.PlayerReplicationInfo);
+            // End:0x2E1
+            if(KillerPRI.Team != Other.PlayerReplicationInfo.Team)
+            {
+                // End:0x1B7
+                if(Other.PlayerReplicationInfo.bHasFlag)
+                {
+                    SkyPlayerReplicationInfo(Other.PlayerReplicationInfo).GetFlag().bLastSecondSave = NearGoal(Other);
+                }
+                // End:0x20A
+                if(CriticalPlayer(Other))
+                {
+                    Killer.PlayerReplicationInfo.Score += float(2);
+                    BonusEvent('critical_frag', Killer.PlayerReplicationInfo);
+                }
+                // End:0x2E1
+                if(bScoreVictimsTarget)
+                {
+                    Target = FindVictimsTarget(Other);
+                    // End:0x2E1
+                    if((((Target != none) && Target.PlayerReplicationInfo != none) && Target.PlayerReplicationInfo.Team == Killer.PlayerReplicationInfo.Team) && CriticalPlayer(Target.Controller))
+                    {
+                        Killer.PlayerReplicationInfo.Score += float(1);
+                        BonusEvent('team_protect_frag', Killer.PlayerReplicationInfo);
+                    }
+                }
+            }
+        }
+        super.ScoreKill(Killer, Other);
+    }
+    // End:0x3E3
+    if(!bScoreTeamKills)
+    {
+        // End:0x3B0
+        if(((((Other.bIsPlayer && Killer != none) && Killer.bIsPlayer) && Killer != Other) && Killer.PlayerReplicationInfo != none) && Killer.PlayerReplicationInfo.Team == Other.PlayerReplicationInfo.Team)
+        {
+            Killer.PlayerReplicationInfo.Score -= float(1);
+        }
+        // End:0x3E1
+        if((MaxLives > 0) && Killer != none)
+        {
+            CheckScore(Killer.PlayerReplicationInfo);
+        }
+        return;
+    }
+    // End:0x4F2
+    if(Other.bIsPlayer)
+    {
+        // End:0x43D
+        if((Killer == none) || Killer == Other)
+        {
+            Other.PlayerReplicationInfo.Team.Score -= float(1);            
+        }
+        else
+        {
+            // End:0x49F
+            if(Killer.PlayerReplicationInfo.Team != Other.PlayerReplicationInfo.Team)
+            {
+                Killer.PlayerReplicationInfo.Team.Score += float(1);                
+            }
+            else
+            {
+                // End:0x4F2
+                if(FriendlyFireScale > float(0))
+                {
+                    Killer.PlayerReplicationInfo.Score -= float(1);
+                    Killer.PlayerReplicationInfo.Team.Score -= float(1);
+                }
+            }
+        }
+    }
+    // End:0x521
+    if((Killer != none) && bScoreTeamKills)
+    {
+        CheckScore(Killer.PlayerReplicationInfo);
+    }
+    //return;    
+}
+
+event ReduceDamage(out int Damage, Pawn injured, Controller InstigatedBy, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
+{
+    local int InjuredTeam, InstigatorTeam;
+
+    // End:0x31
+    if(InstigatedBy == none)
+    {
+        super.ReduceDamage(Damage, injured, InstigatedBy, HitLocation, Momentum, DamageType);
+        return;
+    }
+    InjuredTeam = int(injured.GetTeamNum());
+    InstigatorTeam = int(InstigatedBy.GetTeamNum());
+    // End:0x15D
+    if((InstigatedBy != injured.Controller) && (injured.DrivenVehicle == none) || InstigatedBy.Pawn != injured.DrivenVehicle)
+    {
+        // End:0x15D
+        if((InjuredTeam != 255) && InstigatorTeam != 255)
+        {
+            // End:0x15D
+            if(InjuredTeam == InstigatorTeam)
+            {
+                // End:0x103
+                if(class<SkyDamageType>(DamageType) != none)
+                {
+                    Momentum *= TeammateBoost;
+                }
+                // End:0x11B
+                if(FriendlyFireScale == 0.0000000)
+                {
+                    Damage = 0;
+                    return;
+                }
+                // End:0x151
+                if((Damage > 0) && FriendlyFireScale > float(0))
+                {
+                    Damage = Max(1, int(float(Damage) * FriendlyFireScale));                    
+                }
+                else
+                {
+                    Damage *= FriendlyFireScale;
+                }
+            }
+        }
+    }
+    super.ReduceDamage(Damage, injured, InstigatedBy, HitLocation, Momentum, DamageType);
+    //return;    
+}
+
+function bool DominatingVictory()
+{
+    return ((Teams[0].Score == float(0)) || Teams[1].Score == float(0)) && (Teams[0].Score + Teams[1].Score) >= float(3);
+    //return ReturnValue;    
+}
+
+function bool IsAWinner(PlayerController C)
+{
+    return C.PlayerReplicationInfo.bOnlySpectator || IsWinningTeam(C.PlayerReplicationInfo.Team);
+    //return ReturnValue;    
+}
+
+function bool IsWinningTeam(TeamInfo T)
+{
+    // End:0x39
+    if(Teams[0].Score > Teams[1].Score)
+    {
+        return T == Teams[0];        
+    }
+    else
+    {
+        return T == Teams[1];
+    }
+    //return ReturnValue;    
+}
+
+function PlayRegularEndOfMatchMessage()
+{
+    local SkyPlayerController PC;
+    local int Index;
+
+    // End:0x32
+    if(Teams[0].Score > Teams[1].Score)
+    {
+        Index = 4;        
+    }
+    else
+    {
+        Index = 5;
+    }
+    // End:0x79
+    foreach WorldInfo.AllControllers(Class'SkyPlayerController', PC)
+    {
+        PC.ClientSPlayAnnouncement(VictoryMessageClass, byte(Index));        
+    }    
+    //return;    
+}
+
+function AnnounceScore(int ScoringTeam)
+{
+    local SkyPlayerController PC;
+    local int OtherTeam, MessageIndex;
+
+    OtherTeam = 1 - ScoringTeam;
+    // End:0x54
+    if(Teams[ScoringTeam].Score == (Teams[OtherTeam].Score + float(1)))
+    {
+        MessageIndex = 4 + ScoringTeam;        
+    }
+    else
+    {
+        // End:0x9B
+        if(Teams[ScoringTeam].Score == (Teams[OtherTeam].Score + float(2)))
+        {
+            MessageIndex = 2 + ScoringTeam;            
+        }
+        else
+        {
+            MessageIndex = ScoringTeam;
+        }
+    }
+    // End:0xE5
+    foreach WorldInfo.AllControllers(Class'SkyPlayerController', PC)
+    {
+        PC.ReceiveLocalizedMessage(TeamScoreMessageClass, MessageIndex);        
+    }    
+    //return;    
+}
+
+function OverridePRI(PlayerController PC, PlayerReplicationInfo OldPRI)
+{
+    local SkyTeamInfo DesiredTeam;
+
+    DesiredTeam = SkyTeamInfo(PC.PlayerReplicationInfo.Team);
+    PC.PlayerReplicationInfo.OverrideWith(OldPRI);
+    // End:0x8C
+    if((DesiredTeam != PC.PlayerReplicationInfo.Team) && DesiredTeam != none)
+    {
+        SetTeam(PC, DesiredTeam, true);
+    }
+    //return;    
+}
+
+function bool AllowClientToTeleport(SkyPlayerReplicationInfo ClientPRI, Actor DestinationActor)
+{
+    return GameReplicationInfo.OnSameTeam(ClientPRI, DestinationActor);
+    //return ReturnValue;    
+}
+
+event GetSeamlessTravelActorList(bool bToEntry, out array<Actor> ActorList)
+{
+    super(GameInfo).GetSeamlessTravelActorList(bToEntry, ActorList);
+    ActorList[ActorList.Length] = WorldInfo.GRI.Teams[0];
+    ActorList[ActorList.Length] = WorldInfo.GRI.Teams[1];
+    //return;    
+}
+
+event HandleSeamlessTravelPlayer(out Controller C)
+{
+    local TeamInfo NewTeam;
+
+    // End:0x155
+    if(C.PlayerReplicationInfo != none)
+    {
+        // End:0x125
+        if((C.PlayerReplicationInfo.Team != none) && C.PlayerReplicationInfo.Team.TeamIndex < 2)
+        {
+            NewTeam = Teams[C.PlayerReplicationInfo.Team.TeamIndex];
+            // End:0xDC
+            if(C.PlayerReplicationInfo.Team.Size <= 1)
+            {
+                C.PlayerReplicationInfo.Team.Destroy();                
+            }
+            else
+            {
+                C.PlayerReplicationInfo.Team.RemoveFromTeam(C);
+            }
+            NewTeam.AddToTeam(C);            
+        }
+        else
+        {
+            // End:0x155
+            if(!C.PlayerReplicationInfo.bOnlySpectator)
+            {
+                ChangeTeam(C, 0, false);
+            }
+        }
+    }
+    super.HandleSeamlessTravelPlayer(C);
+    //return;    
+}
+
+static event class<GameInfo> SetGameType(string MapName, string Options, string Portal)
+{
+    return default.Class;
+    //return ReturnValue;    
+}
+
+function ExitAutomatedTest()
+{
+    ConsoleCommand("EXIT");
+    //return;    
+}
+
+function BroadcastDeathMessage(Controller Killer, Controller Other, class<DamageType> DamageType)
+{
+    //return;    
+}
+
+function AddDefaultInventory(Pawn PlayerPawn)
+{
+    PlayerPawn.AddDefaultInventory();
+    SetPlayerDefaults(PlayerPawn);
+    //return;    
+}
+
+function RestartPlayer(Controller NewPlayer)
+{
+    local SkyVehicle SV;
+
+    // End:0x37
+    if(GetCPManager().IsPendingCheckpoint())
+    {
+        GetCPManager().FinalizeLoadCheckpoint();
+        return;
+    }
+    // End:0x55
+    if(GetCPManager().IsLoadingCheckpoint())
+    {
+        return;
+    }
+    super.RestartPlayer(NewPlayer);
+    // End:0x9C
+    if(bAllAmmoOnStart)
+    {
+        // End:0x9C
+        if(PlayerController(NewPlayer) != none)
+        {
+            PlayerController(NewPlayer).CheatManager.AllAmmo();
+        }
+    }
+    // End:0x19B
+    if(NewPlayer.Pawn != none)
+    {
+        // End:0x19A
+        foreach WorldInfo.AllPawns(Class'SkyVehicle', SV)
+        {
+            // End:0x199
+            if((SV.bDeleteMe == false) && SV.Driver == none)
+            {
+                // End:0x130
+                if(SV.Health < SV.default.Health)
+                {
+                    SV.Destroy();
+                    // End:0x199
+                    continue;
+                }
+                // End:0x199
+                if(SV.ParentFactory != none)
+                {
+                    // End:0x199
+                    if(VSize(SV.Location - SV.ParentFactory.Location) > (SV.SpawnRadius * 4.0000000))
+                    {
+                        SV.Destroy();
+                    }
+                }
+            }            
+        }        
+    }
+    //return;    
+}
+
+function bool NeedPlayers()
+{
+    return false;
+    //return ReturnValue;    
+}
+
+// Export USkyGame_Story::execGetCPManager(FFrame&, void* const)
+native function CheckpointManager GetCPManager();

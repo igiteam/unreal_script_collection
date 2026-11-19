@@ -1,0 +1,260 @@
+class AdvClassInfo_MP_Base extends Object;
+
+enum EThrowWeaponType
+{
+    THROW_GrenadeGerman,            // 0
+    THROW_GrenadeRussian,           // 1
+    THROW_DynamiteSmall,            // 2
+    THROW_MAX                       // 3
+};
+
+struct SingleClassInfo
+{
+    var array<int> EquipmentIndices;
+
+    structdefaultproperties
+    {
+        EquipmentIndices=none
+    }
+};
+
+var array< class<Inventory> > Equipment;
+var array<string> EquipmentIconPath;
+var array<SingleClassInfo> ClassInfo;
+var array<int> EquipmentUnlockLevel;
+var array<int> LevelThresholds;
+var array<string> RankIconPath;
+var array< class<AdvFamilyInfo_MP_Hero_Base> > CharacterSkins;
+var array<int> EquipmentDLCIndex;
+var int ThrowWeaponIndices[EThrowWeaponType];
+var int Version;
+
+defaultproperties
+{
+    Equipment[0]=Class'AdvWeap_Melee_Machete'
+    Equipment[1]=Class'AdvWeap_Throw_Grenade_Base'
+    Equipment[2]=Class'AdvInventoryItem_Torch'
+    Equipment[3]=Class'AdvWeap_FlareGun_Base'
+    Equipment[4]=Class'AdvWeap_C96_Base'
+    Equipment[5]=Class'AdvWeap_Bergman_Base'
+    Equipment[6]=Class'AdvWeap_MP38_Base'
+    Equipment[7]=Class'AdvWeap_PPD_Base'
+    Equipment[8]=Class'AdvWeap_Fedorov_Base'
+    Equipment[9]=Class'AdvWeap_MauserSelbstlader_Base'
+    Equipment[10]=Class'AdvWeap_Browning_Base'
+    Equipment[11]=Class'AdvWeap_M1887_Base'
+    Equipment[12]=Class'AdvWeap_MP34_Base'
+    Equipment[13]=Class'AdvWeap_AVS36_Base'
+    Equipment[14]=Class'AdvWeap_Tokarev_Base'
+    Equipment[15]=Class'AdvWeap_GEW06P_Base'
+    Equipment[16]=Class'AdvWeap_DP27_Base'
+    Equipment[17]=Class'AdvWeap_Remington_Base'
+    Equipment[18]=Class'AdvWeap_Throw_Dynamite_Base'
+    Equipment[19]=Class'AdvWeap_Throw_Dynamite_Base'
+    Equipment[20]=Class'AdvWeap_Throw_Grenade_Base'
+    Equipment[21]=Class'AdvWeap_kar98k_Base'
+    Equipment[22]=Class'AdvWeap_LugerFix_Base'
+    Equipment[23]=Class'AdvWeap_Roth_Base'
+    Equipment[24]=Class'AdvWeap_Vis_Base'
+    Equipment[25]=Class'AdvWeap_SLD_Base'
+    Equipment[26]=Class'AdvWeap_Suomi_Base'
+    Equipment[27]=Class'AdvWeap_Thompson_Base'
+    Equipment[28]=Class'AdvWeap_kar98k_scope_Base'
+    Equipment[29]=Class'AdvWeap_P38_Base'
+    Equipment[30]=Class'AdvWeap_Webley_Base'
+    Equipment[31]=Class'AdvWeap_m1935PG_Base'
+    Equipment[32]=Class'AdvWeap_M37Trenchgun_Base'
+    EquipmentIconPath[0]="UI_AdvCommon.Textures.Blank"
+    EquipmentIconPath[1]="UI_AdvMultiplayer.Textures.t_stielhandgranate"
+    EquipmentIconPath[2]="UI_AdvCommon.Textures.Blank"
+    EquipmentIconPath[3]="UI_AdvMultiplayer.Textures.t_flaregun"
+    EquipmentIconPath[4]="UI_AdvMultiplayer.Textures.t_c96"
+    EquipmentIconPath[5]="UI_AdvMultiplayer.Textures.t_mars"
+    EquipmentIconPath[6]="UI_AdvMultiplayer.Textures.t_mp38"
+    EquipmentIconPath[7]="UI_AdvMultiplayer.Textures.t_ppd"
+    EquipmentIconPath[8]="UI_AdvMultiplayer.Textures.t_avtomat"
+    EquipmentIconPath[9]="UI_AdvMultiplayer.Textures.t_selbstalder"
+    EquipmentIconPath[10]="UI_AdvMultiplayer.Textures.t_fn_auto5"
+    EquipmentIconPath[11]="UI_AdvMultiplayer.Textures.t_m1887"
+    EquipmentIconPath[12]="UI_AdvMultiplayer.Textures.t_mp34"
+    EquipmentIconPath[13]="UI_AdvMultiplayer.Textures.t_avs36_sniper"
+    EquipmentIconPath[14]="UI_AdvMultiplayer.Textures.t_tt33"
+    EquipmentIconPath[15]="UI_AdvMultiplayer.Textures.t_gew06p"
+    EquipmentIconPath[16]="UI_AdvMultiplayer.Textures.t_dp27"
+    EquipmentIconPath[17]="UI_AdvMultiplayer.Textures.t_pietta"
+    EquipmentIconPath[18]="UI_AdvMultiplayer.Textures.t_tnt"
+    EquipmentIconPath[19]="UI_AdvMultiplayer.Textures.t_tnt"
+    EquipmentIconPath[20]="UI_AdvMultiplayer.Textures.t_rgd33"
+    EquipmentIconPath[21]="UI_AdvMultiplayer.Textures.t_kar98k"
+    EquipmentIconPath[22]="UI_AdvMultiplayer.Textures.t_p08"
+    EquipmentIconPath[23]="UI_AdvMultiplayer.Textures.t_m1907"
+    EquipmentIconPath[24]="UI_AdvMultiplayer.Textures.t_vis_wz35"
+    EquipmentIconPath[25]="UI_AdvMultiplayer.Textures.t_sld"
+    EquipmentIconPath[26]="UI_AdvMultiplayer.Textures.t_suomi"
+    EquipmentIconPath[27]="UI_AdvMultiplayer.Textures.t_tommygun"
+    EquipmentIconPath[28]="UI_AdvMultiplayer.Textures.t_kar98k_sniper"
+    EquipmentIconPath[29]="UI_AdvMultiplayer.Textures.t_p38"
+    EquipmentIconPath[30]="UI_AdvMultiplayer.Textures.t_webley"
+    EquipmentIconPath[31]="UI_AdvMultiplayer.Textures.t_m1935"
+    EquipmentIconPath[32]="UI_AdvMultiplayer.Textures.t_m97"
+    ClassInfo[0]=(EquipmentIndices=EquipmentIndices[0]=8
+    EquipmentIndices[1]=23
+    EquipmentIndices[2]=0)
+    ClassInfo[1]=(EquipmentIndices=EquipmentIndices[0]=11
+    EquipmentIndices[1]=4
+    EquipmentIndices[2]=0)
+    ClassInfo[2]=(EquipmentIndices=EquipmentIndices[0]=7
+    EquipmentIndices[1]=23
+    EquipmentIndices[2]=0)
+    ClassInfo[3]=(EquipmentIndices=EquipmentIndices[0]=6
+    EquipmentIndices[1]=22
+    EquipmentIndices[2]=0)
+    ClassInfo[4]=(EquipmentIndices=EquipmentIndices[0]=28
+    EquipmentIndices[1]=4
+    EquipmentIndices[2]=0)
+    ClassInfo[5]=(EquipmentIndices=EquipmentIndices[0]=0)
+    ClassInfo[6]=(EquipmentIndices=EquipmentIndices[0]=0)
+    ClassInfo[7]=(EquipmentIndices=EquipmentIndices[0]=0)
+    ClassInfo[8]=(EquipmentIndices=EquipmentIndices[0]=0)
+    ClassInfo[9]=(EquipmentIndices=EquipmentIndices[0]=0)
+    EquipmentUnlockLevel[0]=1
+    EquipmentUnlockLevel[1]=1
+    EquipmentUnlockLevel[2]=1
+    EquipmentUnlockLevel[3]=1
+    EquipmentUnlockLevel[4]=1
+    EquipmentUnlockLevel[5]=8
+    EquipmentUnlockLevel[6]=1
+    EquipmentUnlockLevel[7]=1
+    EquipmentUnlockLevel[8]=1
+    EquipmentUnlockLevel[9]=20
+    EquipmentUnlockLevel[10]=10
+    EquipmentUnlockLevel[11]=1
+    EquipmentUnlockLevel[12]=27
+    EquipmentUnlockLevel[13]=30
+    EquipmentUnlockLevel[14]=15
+    EquipmentUnlockLevel[15]=1
+    EquipmentUnlockLevel[16]=1
+    EquipmentUnlockLevel[17]=1
+    EquipmentUnlockLevel[18]=1
+    EquipmentUnlockLevel[19]=1
+    EquipmentUnlockLevel[20]=1
+    EquipmentUnlockLevel[21]=23
+    EquipmentUnlockLevel[22]=1
+    EquipmentUnlockLevel[23]=1
+    EquipmentUnlockLevel[24]=17
+    EquipmentUnlockLevel[25]=34
+    EquipmentUnlockLevel[26]=13
+    EquipmentUnlockLevel[27]=2
+    EquipmentUnlockLevel[28]=1
+    EquipmentUnlockLevel[29]=25
+    EquipmentUnlockLevel[30]=5
+    EquipmentUnlockLevel[31]=1
+    EquipmentUnlockLevel[32]=1
+    LevelThresholds[0]=0
+    LevelThresholds[1]=1000
+    LevelThresholds[2]=3000
+    LevelThresholds[3]=5000
+    LevelThresholds[4]=7000
+    LevelThresholds[5]=9000
+    LevelThresholds[6]=11000
+    LevelThresholds[7]=13000
+    LevelThresholds[8]=15000
+    LevelThresholds[9]=20000
+    LevelThresholds[10]=25000
+    LevelThresholds[11]=30000
+    LevelThresholds[12]=35000
+    LevelThresholds[13]=40000
+    LevelThresholds[14]=45000
+    LevelThresholds[15]=50000
+    LevelThresholds[16]=55000
+    LevelThresholds[17]=60000
+    LevelThresholds[18]=65000
+    LevelThresholds[19]=70000
+    LevelThresholds[20]=80000
+    LevelThresholds[21]=90000
+    LevelThresholds[22]=100000
+    LevelThresholds[23]=110000
+    LevelThresholds[24]=120000
+    LevelThresholds[25]=130000
+    LevelThresholds[26]=140000
+    LevelThresholds[27]=150000
+    LevelThresholds[28]=160000
+    LevelThresholds[29]=180000
+    LevelThresholds[30]=200000
+    LevelThresholds[31]=220000
+    LevelThresholds[32]=240000
+    LevelThresholds[33]=260000
+    LevelThresholds[34]=300000
+    RankIconPath[0]="ui_advmultiplayer.Textures.t_rang_01_03"
+    RankIconPath[1]="ui_advmultiplayer.Textures.t_rang_02_03"
+    RankIconPath[2]="ui_advmultiplayer.Textures.t_rang_03_03"
+    RankIconPath[3]="ui_advmultiplayer.Textures.t_rang_04_03"
+    RankIconPath[4]="ui_advmultiplayer.Textures.t_rang_05_03"
+    RankIconPath[5]="ui_advmultiplayer.Textures.t_rang_06_03"
+    RankIconPath[6]="ui_advmultiplayer.Textures.t_rang_07_03"
+    RankIconPath[7]="ui_advmultiplayer.Textures.t_rang_08_03"
+    RankIconPath[8]="ui_advmultiplayer.Textures.t_rang_09_03"
+    RankIconPath[9]="ui_advmultiplayer.Textures.t_rang_10_03"
+    RankIconPath[10]="ui_advmultiplayer.Textures.t_rang_11_03"
+    RankIconPath[11]="ui_advmultiplayer.Textures.t_rang_01_02"
+    RankIconPath[12]="ui_advmultiplayer.Textures.t_rang_02_02"
+    RankIconPath[13]="ui_advmultiplayer.Textures.t_rang_03_02"
+    RankIconPath[14]="ui_advmultiplayer.Textures.t_rang_04_02"
+    RankIconPath[15]="ui_advmultiplayer.Textures.t_rang_05_02"
+    RankIconPath[16]="ui_advmultiplayer.Textures.t_rang_06_02"
+    RankIconPath[17]="ui_advmultiplayer.Textures.t_rang_07_02"
+    RankIconPath[18]="ui_advmultiplayer.Textures.t_rang_08_02"
+    RankIconPath[19]="ui_advmultiplayer.Textures.t_rang_09_02"
+    RankIconPath[20]="ui_advmultiplayer.Textures.t_rang_10_02"
+    RankIconPath[21]="ui_advmultiplayer.Textures.t_rang_11_02"
+    RankIconPath[22]="ui_advmultiplayer.Textures.t_rang_12_02"
+    RankIconPath[23]="ui_advmultiplayer.Textures.t_rang_01_01"
+    RankIconPath[24]="ui_advmultiplayer.Textures.t_rang_02_01"
+    RankIconPath[25]="ui_advmultiplayer.Textures.t_rang_03_01"
+    RankIconPath[26]="ui_advmultiplayer.Textures.t_rang_04_01"
+    RankIconPath[27]="ui_advmultiplayer.Textures.t_rang_05_01"
+    RankIconPath[28]="ui_advmultiplayer.Textures.t_rang_06_01"
+    RankIconPath[29]="ui_advmultiplayer.Textures.t_rang_07_01"
+    RankIconPath[30]="ui_advmultiplayer.Textures.t_rang_08_01"
+    RankIconPath[31]="ui_advmultiplayer.Textures.t_rang_09_01"
+    RankIconPath[32]="ui_advmultiplayer.Textures.t_rang_10_01"
+    RankIconPath[33]="ui_advmultiplayer.Textures.t_rang_11_01"
+    RankIconPath[34]="ui_advmultiplayer.Textures.t_rang_12_01"
+    EquipmentDLCIndex[0]=0
+    EquipmentDLCIndex[1]=0
+    EquipmentDLCIndex[2]=0
+    EquipmentDLCIndex[3]=1
+    EquipmentDLCIndex[4]=0
+    EquipmentDLCIndex[5]=0
+    EquipmentDLCIndex[6]=0
+    EquipmentDLCIndex[7]=0
+    EquipmentDLCIndex[8]=0
+    EquipmentDLCIndex[9]=0
+    EquipmentDLCIndex[10]=0
+    EquipmentDLCIndex[11]=0
+    EquipmentDLCIndex[12]=0
+    EquipmentDLCIndex[13]=0
+    EquipmentDLCIndex[14]=0
+    EquipmentDLCIndex[15]=1
+    EquipmentDLCIndex[16]=1
+    EquipmentDLCIndex[17]=1
+    EquipmentDLCIndex[18]=0
+    EquipmentDLCIndex[19]=0
+    EquipmentDLCIndex[20]=0
+    EquipmentDLCIndex[21]=0
+    EquipmentDLCIndex[22]=0
+    EquipmentDLCIndex[23]=0
+    EquipmentDLCIndex[24]=0
+    EquipmentDLCIndex[25]=0
+    EquipmentDLCIndex[26]=0
+    EquipmentDLCIndex[27]=0
+    EquipmentDLCIndex[28]=0
+    EquipmentDLCIndex[29]=0
+    EquipmentDLCIndex[30]=0
+    EquipmentDLCIndex[31]=1
+    EquipmentDLCIndex[32]=1
+    ThrowWeaponIndices[0]=1
+    ThrowWeaponIndices[1]=20
+    ThrowWeaponIndices[2]=18
+    Version=4
+}

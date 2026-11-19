@@ -1,0 +1,1 @@
+class SPSkyBoxStaticMesh extends StaticMeshActor;

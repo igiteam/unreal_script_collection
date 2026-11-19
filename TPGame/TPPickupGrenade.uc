@@ -1,0 +1,2 @@
+class TPPickupGrenade extends TPPickupFactory;
+

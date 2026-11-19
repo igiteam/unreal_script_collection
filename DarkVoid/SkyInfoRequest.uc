@@ -1,0 +1,1 @@
+class SkyInfoRequest extends Info;

@@ -1,0 +1,29 @@
+class R6WeaponAnimConfigPistolRagingBull extends R6WeaponAnimConfigPistol
+    abstract;
+
+defaultproperties
+{
+    m_FPShieldDownReadyAdd="FPStanceTRBullShieldDownReady"
+    m_FPShieldDownAimAdd="FPStanceTRBullShieldDownAim"
+    m_FPShieldDownZoomAdd="FPStanceTRBullShieldDownZoom"
+    m_FPShieldUpReadyAdd="FPStanceTRBullShieldUpReady"
+    m_FPShieldUpAimAdd="FPStanceTRBullShieldUpAim"
+    m_FPShieldUpTrans="FPStanceTRBullShieldDownAimToShieldUpAim"
+    m_FPShieldDownTrans="FPStanceTRBullShieldUpAimToShieldDownAim"
+    m_bPlayReloadEmptyWithShield=false
+    m_bNeedsAllAdditivesWithShield=true
+    m_FPReloadTacticAnim="FPReloadTRBullTactical"
+    m_FPReloadEmptyAnim="FPReloadTRBullEmpty"
+    m_TPReloadTacticAnim="ReadyReloadTRBull"
+    m_TPReloadEmptyAnim="ReadyReloadTRBull"
+    m_WFPReloadTacticAnim="FPTRBullReloadTactical"
+    m_WFPReloadEmptyAnim="FPTRBullReloadEmpty"
+    m_WTPReloadTacticAnim="FPTRBullReloadTactical"
+    m_WTPReloadEmptyAnim="FPTRBullReloadTactical"
+    m_FPStanceAimPistolOverrideAddAnim="FPStanceTRBullAim"
+    m_FPStanceReadyPistolOverrideAddAnim="FPStanceTRBullReady"
+    m_FPStanceZoomPistolOverrideAddAnim="FPStanceTRBullZoom"
+    m_WIdleAnim="FPTRBullStanceNormal"
+    m_WFPFireSingleAnim="FPTRBullFireSingle"
+    m_WFPFireLastAnim="FPTRBullFireSingle"
+}

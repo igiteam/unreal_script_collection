@@ -1,0 +1,1 @@
+class TPDamageTypeImpactPistol extends TPDamageTypeImpact;

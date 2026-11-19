@@ -1,0 +1,2 @@
+class TPPickupShotgun extends TPPickupFactory;
+

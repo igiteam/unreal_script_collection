@@ -1,0 +1,1 @@
+class R6HeatVisionPostProcessEffect extends R6MegaPostProcessEffect;

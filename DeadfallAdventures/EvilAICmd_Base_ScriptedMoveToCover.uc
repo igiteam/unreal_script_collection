@@ -1,0 +1,1 @@
+class EvilAICmd_Base_ScriptedMoveToCover extends EvilAICmd_Base_ScriptedMove within EvilAIController;
